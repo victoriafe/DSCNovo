@@ -55,6 +55,19 @@ services:
       # - ./docker/db/data:/var/lib/postgresql/data:rw
 ###< doctrine/doctrine-bundle ###
 
+  phpmyadmin:
+    depends_on:
+      - database
+    image: phpmyadmin
+    restart: always
+    ports:
+      - "8090:80"
+    environment:
+      PMA_HOST: database
+      PMA_USER: ${MYSQL_USER:-app}
+      PMA_PASSWORD: ${MYSQL_PASSWORD:-!ChangeMe!}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD:-!ChangeMe!}
+
 volumes:
   caddy_data:
   caddy_config:
