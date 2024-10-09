@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registrar{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        body {
+            background: linear-gradient(to right, #4a90e2, #50e3c2);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+        .register-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .btn {
+            background-color: #4a90e2; /* Custom button color */
+            color: white;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="register-container">
+        <h1>Registrar</h1>
+
+        {{ form_errors(registrationForm) }}
+
+        {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.username, {
+            label: 'Nome de usuário'
+        }) }}
+        {{ form_row(registrationForm.plainPassword, {
+            label: 'Senha'
+        }) }}
+        {{ form_row(registrationForm.agreeTerms, {
+            label: 'Aceito os termos'
+        }) }}
+
+        <button type="submit" class="btn btn-lg w-100">Registrar</button>
+        {{ form_end(registrationForm) }}
+    </div>
+{% endblock %}

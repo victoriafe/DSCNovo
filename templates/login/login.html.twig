@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Entrar!{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        body {
+            background: linear-gradient(to right, #4a90e2, #50e3c2);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+        .login-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .btn {
+            background-color: #4a90e2; /* Custom button color */
+            color: white;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="login-container">
+        <form method="post">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            <h1 class="h3 mb-3 font-weight-normal">Por favor, faça login</h1>
+            <label for="username">Nome de usuário</label>
+            <input type="text" value="{{ last_username }}" name="_username" id="username" class="form-control"
+                   autocomplete="username" required autofocus>
+            <label for="password">Senha</label>
+            <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password"
+                   required>
+
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}">
+
+            <div class="checkbox mb-3">
+                <input type="checkbox" name="_remember_me" id="_remember_me">
+                <label for="_remember_me">Lembrar de mim</label>
+            </div>
+
+            <button class="btn btn-lg btn-primary w-100" type="submit">
+                Entrar
+            </button>
+        </form>
+    </div>
+{% endblock %}
