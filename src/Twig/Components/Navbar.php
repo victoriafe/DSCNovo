@@ -9,6 +9,12 @@ final class Navbar
 {
     public string $title;
 
-    public array $routes = [];
+    public array $routes = [
+        'tables' => [
+            'name' => 'app_table_index',
+            'title' => 'Mesas',
+            'access' => 'ROLE_ADMIN',
+        ]
+    ];
 
 }

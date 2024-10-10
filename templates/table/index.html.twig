@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mesas{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="text-center mb-4">Mesas</h1>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span>Total: {{ tables|length }}</span>
+                    <a href="{{ path('app_table_new') }}" class="btn btn-outline-success">Adicionar nova mesa</a>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered align-middle">
+                        <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Número</th>
+                            <th scope="col">Capacidade</th>
+                            <th scope="col" class="text-center">Ações</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for table in tables %}
+                            <tr>
+                                <td>{{ table.number }}</td>
+                                <td>{{ table.capacity }}</td>
+                                <td class="text-center">
+                                    <a href="{{ path('app_table_show', {'id': table.id}) }}"
+                                       class="btn btn-outline-info btn-sm me-2">Mostrar</a>
+                                    <a href="{{ path('app_table_edit', {'id': table.id}) }}"
+                                       class="btn btn-outline-warning btn-sm">Editar</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="3" class="text-center">Nenhum registro encontrado</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
