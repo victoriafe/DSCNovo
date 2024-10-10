@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% set title = isEdit ? 'Editar' ~ ' ' ~ name : 'Adicionar' ~ ' ' ~ name %}
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card shadow">
+                    <div class="card-header text-center">
+                        <h4>{{ title ? title : 'Formulário' }}</h4>
+                    </div>
+                    <div class="card-body">
+                        {{ form_start(form) }}
+
+                        {% for field in form %}
+                            {% if field.vars.name != '_token' %}
+                                <div class="mb-3">
+                                    {{ form_label(field) }}
+                                    {{ form_widget(field, {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_errors(field) }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                            <a href="{{ path('app_' ~ subject ~ '_index') }}" class="btn btn-secondary">Cancelar</a>
+                        </div>
+
+                        {{ form_end(form) }}
+
+                        {% if isEdit %}
+                            <hr>
+                            <div class="d-grid gap-2 mt-3">
+                                <form method="post" action="{{ path('app_' ~ subject ~ '_delete', {'id': entity.id}) }}"
+                                      onsubmit="return confirm('Você tem certeza que deseja apagar este item?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ entity.id) }}">
+                                    <button class="btn btn-danger w-100">Apagar</button>
+                                </form>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
