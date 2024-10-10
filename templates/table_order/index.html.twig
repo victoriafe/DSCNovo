@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Comandas{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="text-center mb-4">Comandas</h1>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span>Total: {{ table_orders|length }}</span>
+                    <a href="{{ path('app_table_order_new') }}" class="btn btn-outline-success">Adicionar nova comanda</a>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered align-middle">
+                        <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Código</th>
+                            <th scope="col">Mesa</th>
+                            <th scope="col">Data do pedido</th>
+                            <th scope="col">Valor Total</th>
+                            <th scope="col" class="text-center">Ações</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for table_order in table_orders %}
+                            <tr>
+                                <td>{{ table_order.id }}</td>
+                                <td>{{ table_order.occupiedTable.number }}</td>
+                                <td>{{ table_order.orderDate ? table_order.orderDate|date('d/m/Y H:i') : '' }}</td>
+                                <td>R$ {{ table_order.totalValue|number_format(2, ',', '.') }}</td>
+                                <td class="text-center">
+                                    <a href="{{ path('app_table_order_show', {'id': table_order.id}) }}"
+                                       class="btn btn-outline-info btn-sm me-2">Mostrar</a>
+                                    <a href="{{ path('app_table_order_edit', {'id': table_order.id}) }}"
+                                       class="btn btn-outline-warning btn-sm">Editar</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5" class="text-center">Nenhum registro encontrado</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
