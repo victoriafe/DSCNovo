@@ -13,6 +13,13 @@ SYMFONY  = $(PHP) bin/console
 .DEFAULT_GOAL = help
 .PHONY        : help build up start down logs sh composer vendor sf cc test
 
+IP = $(shell ifconfig -a | grep -w 192 | awk '{print $$2}')
+
+http:
+	@SERVER_NAME=http://$(IP) \
+          MERCURE_PUBLIC_URL=http://$(IP)/.well-known/mercure \
+          make up
+
 ## —— 🎵 🐳 The Symfony Docker Makefile 🐳 🎵 ——————————————————————————————————
 help: ## Outputs this help screen
 	@grep -E '(^[a-zA-Z0-9\./_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}{printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
@@ -22,7 +29,7 @@ build: ## Builds the Docker images
 	@$(DOCKER_COMP) build --pull --no-cache
 
 up: ## Start the docker hub in detached mode (no logs)
-	@$(DOCKER_COMP) up --detach
+	@$(DOCKER_COMP) up --detach --wait
 
 start: build up ## Build and start the containers
 
