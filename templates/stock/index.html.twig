@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Estoque{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="text-center mb-4">Estoque</h1>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span>Total: {{ stocks|length }}</span>
+{#                    <a href="{{ path('app_stock_new') }}" class="btn btn-outline-success">Adicionar novo item</a>#}
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered align-middle">
+                        <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Quantidade</th>
+                            <th scope="col">Preço de Compra</th>
+                            <th scope="col">Preço de Venda</th>
+                            <th scope="col">Data de Entrada</th>
+                            <th scope="col">Data de Validade</th>
+                            <th scope="col" class="text-center">Ações</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for stock in stocks %}
+                            <tr>
+                                <td>{{ stock.quantity }}</td>
+                                <td>R$ {{ stock.purchasePrice|number_format(2, ',', '.') }}</td>
+                                <td>R$ {{ stock.salePrice|number_format(2, ',', '.') }}</td>
+                                <td>{{ stock.entryDate ? stock.entryDate|date('d/m/Y H:i') : '' }}</td>
+                                <td>{{ stock.expirationDate ? stock.expirationDate|date('d/m/Y') : '' }}</td>
+                                <td class="text-center">
+                                    <a href="{{ path('app_stock_show', {'id': stock.id}) }}"
+                                       class="btn btn-outline-info btn-sm me-2">Mostrar</a>
+                                    <a href="{{ path('app_stock_edit', {'id': stock.id}) }}"
+                                       class="btn btn-outline-warning btn-sm">Editar</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="7" class="text-center">Nenhum registro encontrado</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

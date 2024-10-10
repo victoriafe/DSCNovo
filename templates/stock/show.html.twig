@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detalhes do estoque{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <h1 class="text-center mb-4">Detalhes do estoque</h1>
+
+                <table class="table table-bordered">
+                    <tbody>
+                    <tr>
+                        <th scope="row">ID</th>
+                        <td>{{ stock.id }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Quantidade</th>
+                        <td>{{ stock.quantity }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Preço de compra</th>
+                        <td>R$ {{ stock.purchasePrice|number_format(2, ',', '.') }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Preço de venda</th>
+                        <td>R$ {{ stock.salePrice|number_format(2, ',', '.') }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Data de entrada</th>
+                        <td>{{ stock.entryDate ? stock.entryDate|date('d/m/Y H:i') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Data de validade</th>
+                        <td>{{ stock.expirationDate ? stock.expirationDate|date('d/m/Y') : '' }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="{{ path('app_stock_index') }}" class="btn btn-outline-secondary">Voltar à lista</a>
+                    <a href="{{ path('app_stock_edit', {'id': stock.id}) }}" class="btn btn-outline-warning">Editar</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

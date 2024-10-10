@@ -25,6 +25,11 @@ final class Navbar
             'title' => 'Produtos',
             'access' => 'ROLE_ADMIN',
         ],
+        'stock' => [
+            'name' => 'app_stock_index',
+            'title' => 'Estoque',
+            'access' => 'ROLE_ADMIN',
+        ],
     ];
 
 }

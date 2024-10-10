@@ -54,7 +54,7 @@ final class ProductController extends AbstractController
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_stock_edit', ['id' => $stock->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->templateHelper->renderCrud('produto', 'product', $product, $form);
