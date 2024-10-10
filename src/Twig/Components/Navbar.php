@@ -20,6 +20,11 @@ final class Navbar
             'title' => 'Mesas',
             'access' => 'ROLE_ADMIN',
         ],
+        'products' => [
+            'name' => 'app_product_index',
+            'title' => 'Produtos',
+            'access' => 'ROLE_ADMIN',
+        ],
     ];
 
 }

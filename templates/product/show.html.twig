@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detalhes do produto{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <h1 class="text-center mb-4">Detalhes do produto</h1>
+
+                <table class="table table-bordered">
+                    <tbody>
+                    <tr>
+                        <th scope="row">ID</th>
+                        <td>{{ product.id }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Categoria</th>
+                        <td>{{ product.category }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Nome</th>
+                        <td>{{ product.name }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Preço</th>
+                        <td>R$ {{ product.price|number_format(2, ',', '.') }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="{{ path('app_product_index') }}" class="btn btn-outline-secondary">Voltar à lista</a>
+                    <a href="{{ path('app_product_edit', {'id': product.id}) }}" class="btn btn-outline-warning">Editar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
