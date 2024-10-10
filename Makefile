@@ -16,6 +16,7 @@ SYMFONY  = $(PHP) bin/console
 IP = $(shell ifconfig -a | grep -w 192 | awk '{print $$2}')
 
 http:
+	@echo Up at $(IP)
 	@SERVER_NAME=http://$(IP) \
           MERCURE_PUBLIC_URL=http://$(IP)/.well-known/mercure \
           make up
