@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-custom">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">Home</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -36,3 +36,43 @@
         </div>
     </div>
 </nav>
+
+{% block stylesheets %}
+    <style>
+        .navbar-custom {
+            background-color: #003366; /* cor de fundo: azul escuro */
+        }
+
+        .navbar-custom .navbar-brand, 
+        .navbar-custom .nav-link {
+            color: white; /* Cor das letras: branca */
+            padding: 0 15px; /* espaçamento horizontal entre os links */
+            transition: color 0.2s ease;
+        }
+
+        .navbar-custom .nav-link.active {
+            font-weight: bold;
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: #cccccc; /* Cor de hover: cinza claro */
+            text-shadow: 0 0 1px rgba(255, 255, 255, 0.75);
+        }
+
+        .navbar-custom .dropdown-menu {
+            background-color: #003366; /* azul escuro no dropdown */
+        }
+
+        .navbar-custom .dropdown-menu a {
+            color: white;
+        }
+
+        .navbar-custom .dropdown-menu a:hover {
+            background-color: #004080;
+        }
+
+        .navbar-custom .navbar-toggler {
+            border-color: white;
+        }
+    </style>
+{% endblock %}
