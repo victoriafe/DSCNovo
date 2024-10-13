@@ -29,6 +29,7 @@
         overflow: hidden;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         background-color: #ffff;
+        text-align: center;
     }
 
     .table-hover tbody tr:hover {
@@ -49,7 +50,6 @@
     .table thead th {
         background-color: #0066cc;
         color: #ffff;
-        text-align: center;
         border-color: #80c1ff;
         border-right: 1px solid #80c1ff;
         padding: 10px;
@@ -81,7 +81,7 @@
 
     .btn-outline-warning:hover {
         background-color: #ffcc00;
-        color: #003366;
+        color: #ffffff;
         box-shadow: 0 4px 10px rgba(255, 204, 0, 0.2);
     }
 
