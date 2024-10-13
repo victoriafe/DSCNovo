@@ -8,13 +8,13 @@
     .btn-outline-success {
         background-color: #4ece4a;
         border-color: #4ece4a;
-        color: #003366;
+        color: #1c1c1c;
         transition: all 0.3s ease;
     }
 
     .btn-outline-success:hover {
         background-color: #3399ff;
-        color: white;
+        color: #ffff;
         border-color: #3399ff;
         box-shadow: 0 4px 10px rgba(0, 51, 102, 0.2);
     }
@@ -28,7 +28,7 @@
         border-radius: 15px;
         overflow: hidden;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        background-color: #ffffff;
+        background-color: #ffff;
     }
 
     .table-hover tbody tr:hover {
@@ -48,7 +48,7 @@
     /* Bordas verticais apenas no thead */
     .table thead th {
         background-color: #0066cc;
-        color: white;
+        color: #ffff;
         text-align: center;
         border-color: #80c1ff;
         border-right: 1px solid #80c1ff;
