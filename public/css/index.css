@@ -1,0 +1,103 @@
+    body {
+        background-color: #f4f7f9;
+        color: #003366;
+        font-family: 'Arial', sans-serif;
+    }
+
+    /* Estilização do botão de adicionar produto */
+    .btn-outline-success {
+        background-color: #4ece4a;
+        border-color: #4ece4a;
+        color: #003366;
+        transition: all 0.3s ease;
+    }
+
+    .btn-outline-success:hover {
+        background-color: #3399ff;
+        color: white;
+        border-color: #3399ff;
+        box-shadow: 0 4px 10px rgba(0, 51, 102, 0.2);
+    }
+
+    /* Estilização da tabela */
+    .table {
+        width: 100%;
+        table-layout: auto;
+        border-collapse: separate;
+        border-spacing: 0;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #e0f2ff;
+        transition: background-color 0.2s ease;
+    }
+
+    /* Bordas horizontais no corpo */
+    .table tbody td {
+        border-top: 1px solid #80c1ff;
+        border-bottom: 1px solid #80c1ff; 
+        color: #333;
+        padding: 10px;
+        vertical-align: middle;
+    }
+
+    /* Bordas verticais apenas no thead */
+    .table thead th {
+        background-color: #0066cc;
+        color: white;
+        text-align: center;
+        border-color: #80c1ff;
+        border-right: 1px solid #80c1ff;
+        padding: 10px;
+        font-weight: bold;
+    }
+
+    .table thead th:last-child {
+        border-right: none;
+    }
+
+    /* Botões de ações na tabela */
+    .btn-outline-info {
+        border-color: #3399ff;
+        color: #3399ff;
+        transition: all 0.3s ease;
+    }
+
+    .btn-outline-info:hover {
+        background-color: #3399ff;
+        color: white;
+        box-shadow: 0 4px 10px rgba(51, 153, 255, 0.2);
+    }
+
+    .btn-outline-warning {
+        border-color: #ffcc00;
+        color: #ffcc00;
+        transition: all 0.3s ease;
+    }
+
+    .btn-outline-warning:hover {
+        background-color: #ffcc00;
+        color: #003366;
+        box-shadow: 0 4px 10px rgba(255, 204, 0, 0.2);
+    }
+
+    /* Centralização do texto */
+    .text-center {
+        text-align: center;
+    }
+
+    /* Ajustes de espaçamento */
+    .container {
+        margin-top: 50px;
+        margin-bottom: 50px;
+        max-width: 100%;
+    }
+
+    .btn-sm {
+        padding: 5px 10px;
+        font-size: 0.9rem;
+    }

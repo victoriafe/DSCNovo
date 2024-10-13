@@ -1,0 +1,36 @@
+
+    .navbar-custom {
+        background-color: #003366;
+    }
+
+    .navbar-custom .navbar-brand, 
+    .navbar-custom .nav-link {
+        color: #ffff; /* cor das letras: branca */
+        padding: 0 15px; /* espaçamento horizontal entre os links */
+        transition: color 0.2s ease;
+    }
+
+    .navbar-custom .nav-link.active {
+        font-weight: bold;
+    }
+
+    .navbar-custom .nav-link:hover {
+        color: #cccccc;
+        text-shadow: 0 0 1px rgba(255, 255, 255, 0.75);
+    }
+
+    .navbar-custom .dropdown-menu {
+        background-color: #003366; /* azul escuro no dropdown */
+    }
+
+    .navbar-custom .dropdown-menu a {
+        color: #ffff;
+    }
+
+    .navbar-custom .dropdown-menu a:hover {
+        background-color: #0066cc;
+    }
+
+    .navbar-custom .navbar-toggler {
+        border-color: #ffff;
+    }
