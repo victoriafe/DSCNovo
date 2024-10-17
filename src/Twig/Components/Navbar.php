@@ -20,11 +20,6 @@ final class Navbar
             'title' => 'Pedidos',
             'access' => 'ROLE_WAITER',
         ],
-        'tables' => [
-            'name' => 'app_table_index',
-            'title' => 'Mesas',
-            'access' => 'ROLE_ADMIN',
-        ],
         'products' => [
             'name' => 'app_product_index',
             'title' => 'Produtos',
@@ -33,6 +28,11 @@ final class Navbar
         'stock' => [
             'name' => 'app_stock_index',
             'title' => 'Estoque',
+            'access' => 'ROLE_ADMIN',
+        ],
+        'tables' => [
+            'name' => 'app_table_index',
+            'title' => 'Mesas',
             'access' => 'ROLE_ADMIN',
         ],
     ];
