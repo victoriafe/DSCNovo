@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enums\TableOrderStatus;
 use App\Repository\TableOrderRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -19,9 +20,6 @@ class TableOrder
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $orderDate = null;
 
-    #[ORM\Column]
-    private ?float $totalValue = null;
-
     #[ORM\ManyToOne(inversedBy: 'tableOrders')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Table $occupiedTable = null;
@@ -32,9 +30,23 @@ class TableOrder
     #[ORM\OneToMany(targetEntity: Order::class, mappedBy: 'tableOrder')]
     private Collection $orders;
 
+    #[ORM\Column(type: 'integer', nullable: false, enumType: TableOrderStatus::class)]
+    private TableOrderStatus $status;
+
+    public function getStatus(): TableOrderStatus
+    {
+        return $this->status;
+    }
+
+    public function setStatus(TableOrderStatus $status): void
+    {
+        $this->status = $status;
+    }
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
+        $this->status = TableOrderStatus::NOT_OCCUPIED;
     }
 
     public function getId(): ?int
@@ -56,14 +68,13 @@ class TableOrder
 
     public function getTotalValue(): ?float
     {
-        return $this->totalValue;
-    }
+        $total = 0 ;
 
-    public function setTotalValue(float $totalValue): static
-    {
-        $this->totalValue = $totalValue;
+        foreach ($this->orders as $order) {
+            $total += $order->getSubtotal();
+        }
 
-        return $this;
+        return $total;
     }
 
     public function getOccupiedTable(): ?Table

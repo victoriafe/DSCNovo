@@ -32,6 +32,8 @@
                                 <td>{{ table_order.orderDate ? table_order.orderDate|date('d/m/Y H:i') : '' }}</td>
                                 <td>R$ {{ table_order.totalValue|number_format(2, ',', '.') }}</td>
                                 <td class="text-center">
+                                    <a href="{{ path('app_order_new', {'id': table_order.id}) }}"
+                                       class="btn btn-outline-success btn-sm me-2">Adicionar pedido</a>
                                     <a href="{{ path('app_table_order_show', {'id': table_order.id}) }}"
                                        class="btn btn-outline-info btn-sm me-2">Mostrar</a>
                                     <a href="{{ path('app_table_order_edit', {'id': table_order.id}) }}"

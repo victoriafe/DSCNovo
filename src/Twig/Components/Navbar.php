@@ -15,6 +15,11 @@ final class Navbar
             'title' => 'Comandas',
             'access' => 'ROLE_WAITER',
         ],
+        'orders' => [
+            'name' => 'app_order_index',
+            'title' => 'Pedidos',
+            'access' => 'ROLE_WAITER',
+        ],
         'tables' => [
             'name' => 'app_table_index',
             'title' => 'Mesas',

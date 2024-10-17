@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pedidos{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="text-center mb-4">Pedidos</h1>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span>Total: {{ orders|length }}</span>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered align-middle">
+                        <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Mesa</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Produto</th>
+                            <th scope="col">Valor Un.</th>
+                            <th scope="col">Quantidade</th>
+                            <th scope="col">Total</th>
+                            <th scope="col" class="text-center">Ações</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for order in orders %}
+                            <tr>
+                                <td>{{ order.tableOrder.occupiedTable.number }}</td>
+
+                                <td>
+                                    {% if order.status.name == 'DELIVERED' %}
+                                        <span class="badge rounded-pill text-bg-success">ENTREGUE</span>
+                                    {% else %}
+                                        <span class="badge rounded-pill text-bg-warning">RECEBIDO</span>
+
+                                    {% endif %}
+                                </td>
+                                <td>{{ order.product.name }}</td>
+                                <td>R$ {{ order.unitValue|number_format(2, ',', '.') }}</td>
+                                <td>{{ order.quantity }}</td>
+                                <td>R$ {{ order.subtotal|number_format(2, ',', '.') }}</td>
+                                <td class="text-center">
+                                    {% if order.status.name != 'DELIVERED' %}
+                                        <form method="post"
+                                              action="{{ path('app_order_finish', {'id': order.id}) }}">
+                                            <button type="submit"
+                                                    class="btn btn-outline-info btn-sm me-2 mb-2">Concluír
+                                            </button>
+                                        </form>
+                                    {% endif %}
+                                    <a href="{{ path('app_order_show', {'id': order.id}) }}"
+                                       class="btn btn-outline-info btn-sm me-2">Mostrar</a>
+                                    <a href="{{ path('app_order_edit', {'id': order.id}) }}"
+                                       class="btn btn-outline-warning btn-sm">Editar</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5" class="text-center">Nenhum registro encontrado</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

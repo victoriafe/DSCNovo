@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enums\OrderStatus;
 use App\Repository\OrderRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -26,6 +27,28 @@ class Order
 
     #[ORM\Column]
     private ?float $subtotal = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Product $product = null;
+
+    #[ORM\Column(type: 'integer', nullable: false, enumType: OrderStatus::class)]
+    private OrderStatus $status;
+
+    public function getStatus(): OrderStatus
+    {
+        return $this->status;
+    }
+
+    public function setStatus(OrderStatus $status): void
+    {
+        $this->status = $status;
+    }
+
+    public function __construct()
+    {
+        $this->status = OrderStatus::RECEIVED;
+    }
 
     public function getId(): ?int
     {
@@ -76,6 +99,18 @@ class Order
     public function setSubtotal(float $subtotal): static
     {
         $this->subtotal = $subtotal;
+
+        return $this;
+    }
+
+    public function getProduct(): ?Product
+    {
+        return $this->product;
+    }
+
+    public function setProduct(Product $product): static
+    {
+        $this->product = $product;
 
         return $this;
     }
