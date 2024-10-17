@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\TableOrder;
 use App\Enums\TableOrderStatus;
+use App\Enums\TableStatus;
 use App\Form\TableOrderType;
 use App\Repository\TableOrderRepository;
 use App\Service\TemplateHelper;
@@ -36,10 +37,12 @@ final class TableOrderController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($tableOrder);
+            $table = $tableOrder->getOccupiedTable();
+            $table->setStatus(TableStatus::OCCUPIED);
+            $entityManager->persist($table);
 
             $tableOrder->setOrderDate(new \DateTime('now'));
-
+            $entityManager->persist($tableOrder);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_table_order_index', [], Response::HTTP_SEE_OTHER);
@@ -50,6 +53,10 @@ final class TableOrderController extends AbstractController
 
     #[Route('/finish/{id}', name: 'app_table_order_finish', methods: ['POST'])]
     public function finish(EntityManagerInterface $entityManager,  TableOrder $tableOrder): Response {
+        $table = $tableOrder ->getOccupiedTable();
+        $table->setStatus(TableStatus::EMPTY);
+        $entityManager->persist($table);
+
         $tableOrder->setStatus(TableOrderStatus::FINISHED);
         $entityManager->persist($tableOrder);
         $entityManager->flush();

@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Table;
+use App\Enums\TableStatus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -14,6 +16,12 @@ class TableRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Table::class);
+    }
+
+    public function findAvailable(): QueryBuilder {
+        return $this->createQueryBuilder('t')
+            ->where('t.status = :available')
+            ->setParameter('available', TableStatus::EMPTY->value);
     }
 
     //    /**

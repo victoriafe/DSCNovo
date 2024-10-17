@@ -19,6 +19,7 @@
                         <tr>
                             <th scope="col">Número</th>
                             <th scope="col">Capacidade</th>
+                            <th scope="col">Status</th>
                             <th scope="col" class="text-center">Ações</th>
                         </tr>
                         </thead>
@@ -27,6 +28,13 @@
                             <tr>
                                 <td>{{ table.number }}</td>
                                 <td>{{ table.capacity }}</td>
+                                <td>
+                                    {% if table.isOccupied %}
+                                        <span class="badge rounded-pill text-bg-danger">Ocupada</span>
+                                    {% else %}
+                                        <span class="badge rounded-pill text-bg-success">Livre</span>
+                                    {% endif %}
+                                </td>
                                 <td class="text-center">
                                     <a href="{{ path('app_table_show', {'id': table.id}) }}"
                                        class="btn btn-outline-info btn-sm me-2">Mostrar</a>

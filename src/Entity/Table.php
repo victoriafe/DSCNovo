@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enums\TableStatus;
 use App\Repository\TableRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -22,6 +23,24 @@ class Table
     #[ORM\Column]
     private ?int $capacity = null;
 
+    #[ORM\Column(type: 'integer', nullable: false, enumType: TableStatus::class)]
+    private TableStatus $status;
+
+    public function isOccupied(): bool
+    {
+        return $this->status === TableStatus::OCCUPIED;
+    }
+
+    public function getStatus(): TableStatus
+    {
+        return $this->status;
+    }
+
+    public function setStatus(TableStatus $status): void
+    {
+        $this->status = $status;
+    }
+
     /**
      * @var Collection<int, TableOrder>
      */
@@ -31,6 +50,7 @@ class Table
     public function __construct()
     {
         $this->tableOrders = new ArrayCollection();
+        $this->status = TableStatus::EMPTY;
     }
 
     public function getId(): ?int
