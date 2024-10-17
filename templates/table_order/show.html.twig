@@ -1,5 +1,5 @@
 {% block stylesheets %}
-    <link rel="stylesheet" href={{ asset("css/show.css") }} >
+    <link rel="stylesheet" href={{ asset("css/show.css") }}>
 {% endblock %}
 
 {% extends 'base.html.twig' %}
@@ -96,6 +96,8 @@
                     {% if not table_order.isFinished %}
                         <a href="{{ path('app_table_order_edit', {'id': table_order.id}) }}"
                            class="btn btn-outline-warning">Editar</a>
+                        <a href="{{ path('app_order_new', {'id': table_order.id}) }}"
+                           class="btn btn-outline-success">Adicionar pedido</a>
                         <form method="post"
                               action="{{ path('app_table_order_finish', {'id': table_order.id}) }}">
                             <button type="submit"
