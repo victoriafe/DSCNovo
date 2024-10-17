@@ -25,7 +25,7 @@ final class TableOrderController extends AbstractController
     public function index(TableOrderRepository $tableOrderRepository): Response
     {
         return $this->render('table_order/index.html.twig', [
-            'table_orders' => $tableOrderRepository->findAll(),
+            'table_orders' => $tableOrderRepository->findBy([], orderBy: ['orderDate' => 'DESC']),
         ]);
     }
 
