@@ -21,6 +21,15 @@
 </head>
 <body>
 <twig:Navbar/>
+
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="m-2 alert alert-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
 {% block body %}{% endblock %}
 </body>
 </html>
