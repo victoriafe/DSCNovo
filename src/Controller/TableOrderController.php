@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Table;
 use App\Entity\TableOrder;
+use App\Enums\OrderStatus;
 use App\Enums\TableOrderStatus;
 use App\Enums\TableStatus;
 use App\Form\TableOrderType;
@@ -29,10 +31,15 @@ final class TableOrderController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_table_order_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/new/{id}', name: 'app_table_order_new', defaults: ['id' => null], methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager, Table $selectedTable = null): Response
     {
         $tableOrder = new TableOrder();
+
+        if ($selectedTable) {
+            $tableOrder->setOccupiedTable($selectedTable);
+        }
+
         $form = $this->createForm(TableOrderType::class, $tableOrder);
         $form->handleRequest($request);
 
@@ -52,7 +59,15 @@ final class TableOrderController extends AbstractController
     }
 
     #[Route('/finish/{id}', name: 'app_table_order_finish', methods: ['POST'])]
-    public function finish(EntityManagerInterface $entityManager,  TableOrder $tableOrder): Response {
+    public function finish(EntityManagerInterface  $entityManager,  TableOrder $tableOrder): Response {
+
+        foreach ($tableOrder->getOrders() as $order) {
+            if ($order->getStatus() === OrderStatus::RECEIVED) {
+                $this->addFlash('danger', 'Você não pode fechar uma comanda com pedidos abertos!');
+                return $this->redirectToRoute('app_table_order_index');
+            }
+        }
+
         $table = $tableOrder ->getOccupiedTable();
         $table->setStatus(TableStatus::EMPTY);
         $entityManager->persist($table);
@@ -61,7 +76,7 @@ final class TableOrderController extends AbstractController
         $entityManager->persist($tableOrder);
         $entityManager->flush();
 
-        return  $this->redirectToRoute('app_table_order_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_table_order_index', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}', name: 'app_table_order_show', methods: ['GET'])]

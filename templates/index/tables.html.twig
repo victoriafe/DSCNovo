@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mesas{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h2 class="mb-4">Visão geral</h2>
+        <div class="row">
+            {% for table in tables %}
+                <div class="col-md-4 mb-3">
+                    <a href="{{ path('app_index_order_from_table', { id: table.id }) }}" class="text-decoration-none">
+                        <div class="card text-white {% if not table.isOccupied %}bg-success{% else %}bg-danger{% endif %}">
+                            <div class="card-body">
+                                <h5 class="card-title">Mesa {{ table.number }}</h5>
+                                <p class="card-text mb-1">Capacidade: {{ table.capacity }} pessoas</p>
+                                <p class="card-text mb-0">
+                                    Status:
+                                    {% if not table.isOccupied %}
+                                        DISPONÍVEL
+                                    {% else %}
+                                        OCUPADA
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% else %}
+                <div class="col-12">
+                    <div class="alert alert-info" role="alert">
+                        No tables found.
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+{% endblock %}
