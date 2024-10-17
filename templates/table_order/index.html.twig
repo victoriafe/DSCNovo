@@ -10,7 +10,8 @@
 
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <span>Total: {{ table_orders|length }}</span>
-                    <a href="{{ path('app_table_order_new') }}" class="btn btn-outline-success">Adicionar nova comanda</a>
+                    <a href="{{ path('app_table_order_new') }}" class="btn btn-outline-success">Adicionar nova
+                        comanda</a>
                 </div>
 
                 <div class="table-responsive">
@@ -18,6 +19,7 @@
                         <thead class="table-dark">
                         <tr>
                             <th scope="col">Código</th>
+                            <th scope="col">Status</th>
                             <th scope="col">Mesa</th>
                             <th scope="col">Data do pedido</th>
                             <th scope="col">Valor Total</th>
@@ -28,16 +30,36 @@
                         {% for table_order in table_orders %}
                             <tr>
                                 <td>{{ table_order.id }}</td>
+                                <td>
+                                    {% if table_order.status.name == 'ONGOING' %}
+                                        <span class="badge rounded-pill text-bg-success">EM ABERTO</span>
+                                    {% else %}
+                                        <span class="badge rounded-pill text-bg-warning">FECHADA</span>
+                                    {% endif %}
+                                </td>
                                 <td>{{ table_order.occupiedTable.number }}</td>
                                 <td>{{ table_order.orderDate ? table_order.orderDate|date('d/m/Y H:i') : '' }}</td>
                                 <td>R$ {{ table_order.totalValue|number_format(2, ',', '.') }}</td>
                                 <td class="text-center">
-                                    <a href="{{ path('app_order_new', {'id': table_order.id}) }}"
-                                       class="btn btn-outline-success btn-sm me-2">Adicionar pedido</a>
+                                    {% if not table_order.isFinished %}
+                                        <form method="post"
+                                              action="{{ path('app_table_order_finish', {'id': table_order.id}) }}">
+                                            <button type="submit"
+                                                    class="btn btn-outline-success btn-sm me-2 mb-2">Fechar
+                                            </button>
+                                        </form>
+                                        <a href="{{ path('app_order_new', {'id': table_order.id}) }}"
+                                           class="btn btn-outline-success btn-sm me-2">Adicionar pedido</a>
+                                    {% endif %}
+
                                     <a href="{{ path('app_table_order_show', {'id': table_order.id}) }}"
                                        class="btn btn-outline-info btn-sm me-2">Mostrar</a>
-                                    <a href="{{ path('app_table_order_edit', {'id': table_order.id}) }}"
-                                       class="btn btn-outline-warning btn-sm">Editar</a>
+                                    {% if not table_order.isFinished %}
+
+                                        <a href="{{ path('app_table_order_edit', {'id': table_order.id}) }}"
+                                           class="btn btn-outline-warning btn-sm">Editar</a>
+                                    {% endif %}
+
                                 </td>
                             </tr>
                         {% else %}

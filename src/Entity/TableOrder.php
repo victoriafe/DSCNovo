@@ -33,6 +33,10 @@ class TableOrder
     #[ORM\Column(type: 'integer', nullable: false, enumType: TableOrderStatus::class)]
     private TableOrderStatus $status;
 
+    public function isFinished(): bool {
+      return $this->status == TableOrderStatus::FINISHED;
+    }
+
     public function getStatus(): TableOrderStatus
     {
         return $this->status;
@@ -46,7 +50,7 @@ class TableOrder
     public function __construct()
     {
         $this->orders = new ArrayCollection();
-        $this->status = TableOrderStatus::NOT_OCCUPIED;
+        $this->status = TableOrderStatus::ONGOING;
     }
 
     public function getId(): ?int

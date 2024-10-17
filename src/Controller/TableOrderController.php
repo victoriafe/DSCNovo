@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\TableOrder;
+use App\Enums\TableOrderStatus;
 use App\Form\TableOrderType;
 use App\Repository\TableOrderRepository;
 use App\Service\TemplateHelper;
@@ -38,7 +39,6 @@ final class TableOrderController extends AbstractController
             $entityManager->persist($tableOrder);
 
             $tableOrder->setOrderDate(new \DateTime('now'));
-            $tableOrder->setTotalValue(0);
 
             $entityManager->flush();
 
@@ -46,6 +46,15 @@ final class TableOrderController extends AbstractController
         }
 
         return $this->templateHelper->renderCrud('comanda', 'table_order', $tableOrder, $form);
+    }
+
+    #[Route('/finish/{id}', name: 'app_table_order_finish', methods: ['POST'])]
+    public function finish(EntityManagerInterface $entityManager,  TableOrder $tableOrder): Response {
+        $tableOrder->setStatus(TableOrderStatus::FINISHED);
+        $entityManager->persist($tableOrder);
+        $entityManager->flush();
+
+        return  $this->redirectToRoute('app_table_order_index', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}', name: 'app_table_order_show', methods: ['GET'])]

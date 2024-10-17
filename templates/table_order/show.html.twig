@@ -60,7 +60,7 @@
                                 </tr>
                             {% else %}
                                 <tr>
-                                    <td colspan="6" class="text-center">No orders found.</td>
+                                    <td colspan="6" class="text-center">Sem pedidos encontrados.</td>
                                 </tr>
                             {% endfor %}
                             </tbody>
@@ -89,9 +89,18 @@
 
                 <div class="d-flex justify-content-between mt-4">
                     <a href="{{ path('app_table_order_index') }}" class="btn btn-outline-secondary">Voltar à lista</a>
-                    <a href="{{ path('app_table_order_edit', {'id': table_order.id}) }}"
-                       class="btn btn-outline-warning">Editar</a>
+                    {% if not table_order.isFinished %}
+                        <a href="{{ path('app_table_order_edit', {'id': table_order.id}) }}"
+                           class="btn btn-outline-warning">Editar</a>
+                        <form method="post"
+                              action="{{ path('app_table_order_finish', {'id': table_order.id}) }}">
+                            <button type="submit"
+                                    class="btn btn-outline-primary">Concluír
+                            </button>
+                        </form>
+                    {% endif %}
                 </div>
+
             </div>
         </div>
     </div>
