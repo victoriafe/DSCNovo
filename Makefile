@@ -15,6 +15,8 @@ SYMFONY  = $(PHP) bin/console
 
 IP = $(shell ifconfig -a | grep -w 192 | awk '{print $$2}')
 
+setup: build up fixtures
+
 fixtures:
 	@$(DOCKER_COMP) exec php php bin/console doctrine:fixtures:load --no-interaction
 
