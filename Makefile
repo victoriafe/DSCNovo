@@ -15,6 +15,9 @@ SYMFONY  = $(PHP) bin/console
 
 IP = $(shell ifconfig -a | grep -w 192 | awk '{print $$2}')
 
+fixtures:
+	@$(DOCKER_COMP) exec php php bin/console doctrine:fixtures:load --no-interaction
+
 http:
 	@echo Up at $(IP)
 	@SERVER_NAME=http://$(IP) \
