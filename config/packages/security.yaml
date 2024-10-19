@@ -38,12 +38,55 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     role_hierarchy:
-        ROLE_WAITER: ROLE_USER
+        ROLE_CHEF: ROLE_USER
+        ROLE_WAITER: ROLE_CHEF
         ROLE_ADMIN: ROLE_WAITER
         
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/menu, roles: ROLE_USER }
+
+        # Acesso para os Garçons (ROLE_WAITER) e Administradores (ROLE_ADMIN)
+        - { path: ^/order, roles: ROLE_CHEF }
+        - { path: ^/orderfinish, roles: ROLE_WAITER }
+        - { path: ^/order/new, roles: ROLE_WAITER }
+        - { path: ^/order/\d+, roles: ROLE_CHEF }
+        - { path: ^/order/\d+/edit, roles: ROLE_WAITER }
+        - { path: ^/order/\d+, methods: POST, roles: ROLE_WAITER }
+
+        - { path: ^/table_order, roles: ROLE_WAITER }
+        - { path: ^/table_order/new, roles: ROLE_WAITER }
+        - { path: ^/table_order/finish, roles: ROLE_WAITER }
+        - { path: ^/table_order/\d+, roles: ROLE_WAITER }
+        - { path: ^/table_order/\d+/edit, roles: ROLE_WAITER }
+        - { path: ^/table_order/\d+, methods: POST, roles: ROLE_WAITER }
+
+        # Acesso para os Administradores (ROLE_ADMIN)
+        - { path: ^/product, roles: ROLE_ADMIN }
+        - { path: ^/product/new, roles: ROLE_ADMIN }
+        - { path: ^/product/\d+, roles: ROLE_ADMIN }
+        - { path: ^/product/\d+/edit, roles: ROLE_ADMIN }
+        - { path: ^/product/\d+, methods: POST, roles: ROLE_ADMIN }
+
+        - { path: ^/stock, roles: ROLE_ADMIN }
+        - { path: ^/stock/new, roles: ROLE_ADMIN }
+        - { path: ^/stock/\d+, roles: ROLE_ADMIN }
+        - { path: ^/stock/\d+/edit, roles: ROLE_ADMIN }
+        - { path: ^/stock/\d+, methods: POST, roles: ROLE_ADMIN }
+
+        - { path: ^/table, roles: ROLE_ADMIN }
+        - { path: ^/table/new, roles: ROLE_ADMIN }
+        - { path: ^/table/\d+, roles: ROLE_ADMIN }
+        - { path: ^/table/\d+/edit, roles: ROLE_ADMIN }
+        - { path: ^/table/\d+, methods: POST, roles: ROLE_ADMIN }
+            
+        - { path: ^/user, roles: ROLE_ADMIN }
+        - { path: ^/user/new, roles: ROLE_ADMIN }
+        - { path: ^/user/\d+, roles: ROLE_ADMIN }
+        - { path: ^/user/\d+/edit, roles: ROLE_ADMIN }
+        - { path: ^/user/\d+, methods: POST, roles: ROLE_ADMIN }
+
+        - { path: ^/report, roles: ROLE_ADMIN }
+
 
 when@test:
     security:
