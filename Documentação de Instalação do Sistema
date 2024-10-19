@@ -42,8 +42,6 @@ Configure o ambiente:
    Execute o comando abaixo para configurar o ambiente:
    
    make setup
-   make up
-
 
 Acesso ao Sistema
 Depois que tudo estiver configurado, você pode acessar o sistema pelo seu navegador. Abra o seguinte link:
