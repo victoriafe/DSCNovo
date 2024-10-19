@@ -23,7 +23,9 @@
 <body>
 <link rel="stylesheet" href={{ asset("css/base.css") }}>
 
-<twig:Navbar/>
+{% if hideNav is not defined %}
+    <twig:Navbar/>
+{% endif %}
 
 {% for label, messages in app.flashes %}
     {% for message in messages %}
