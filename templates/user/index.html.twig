@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Usuários{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="text-center mb-4">Usuários</h1>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span>Total: {{ users|length }}</span>
+                    <a href="{{ path('app_user_new') }}" class="btn btn-outline-success">Adicionar novo usuário</a>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered align-middle">
+                        <thead class="table-dark">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Usuário</th>
+                            <th scope="col">Cargos</th>
+                            <th scope="col" class="text-center">Ações</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.id }}</td>
+                                <td>{{ user.name }}</td>
+                                <td>{{ user.username }}</td>
+                                <td>
+                                    {% if user.roles is empty %}
+                                        Nenhum cargo atribuído
+                                    {% else %}
+                                        {% for role in user.roles %}
+                                            <span
+                                                class="badge rounded-pill bg-primary me-1">{{ role|replace({'ROLE_': ''}) }}</span>
+                                        {% endfor %}
+                                    {% endif %}
+                                </td>
+                                <td class="text-center">
+                                    <a href="{{ path('app_user_show', {'id': user.id}) }}"
+                                       class="btn btn-outline-info btn-sm me-2">Mostrar</a>
+                                    <a href="{{ path('app_user_edit', {'id': user.id}) }}"
+                                       class="btn btn-outline-warning btn-sm">Editar</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5" class="text-center">Nenhum registro encontrado</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
