@@ -34,9 +34,6 @@ class ReportController extends AbstractController
     #[Route('/report', name: 'app_report_index')]
     public function index(): Response
     {
-        // Total de pedidos
-        $totalOrders = $this->orderRepository->count([]);
-
         // Total de vendas e receita
         $salesData = $this->orderRepository->createQueryBuilder('o')
             ->select('SUM(o.subtotal) AS totalRevenue, COUNT(o.id) AS totalSales')
@@ -84,6 +81,11 @@ class ReportController extends AbstractController
             ->join('p.stock', 's')
             ->getQuery()
             ->getResult();
+
+        // Total de pedidos
+        $totalOrders = $this->tableOrderRepository->count();
+
+        dump($totalOrders);
 
         return $this->render('report/index.html.twig', [
             'totalOrders' => $totalOrders,

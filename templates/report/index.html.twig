@@ -7,9 +7,9 @@
         <h1 class="mb-4">Relatório de Vendas</h1>
 
         <div class="mb-4">
-            <h2>Total de Pedidos: {{ totalOrders }}</h2>
-            <h2>Receita Total: R$ {{ totalRevenue|number_format(2, ',', '.') }}</h2>
-            <h2>Total de Vendas: {{ totalSales }}</h2>
+            <h2>Total de comandas atendidas: {{ totalOrders }}</h2>
+            <h2>Total de vendas de produtos: {{ totalSales }}</h2>
+            <h2>Receita total: R$ {{ totalRevenue|number_format(2, ',', '.') }}</h2>
         </div>
 
         <h3>Produtos Mais Vendidos</h3>
@@ -48,46 +48,6 @@
             </tbody>
         </table>
 
-
-        <h3>Níveis de Estoque</h3>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>Produto</th>
-                <th>Quantidade em Estoque</th>
-                <th>Preço de Venda</th>
-                <th>Preço de Compra</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for stock in stockLevels %}
-                <tr>
-                    <td>{{ stock.productName }}</td>
-                    <td>{{ stock.quantity }}</td>
-                    <td>R$ {{ stock.salePrice|number_format(2, ',', '.') }}</td>
-                    <td>R$ {{ stock.purchasePrice|number_format(2, ',', '.') }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-
-        <h3>Produtos em Estoque</h3>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>Nome do Produto</th>
-                <th>Quantidade em Estoque</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for product in productsInStock %}
-                <tr>
-                    <td>{{ product.name }}</td>
-                    <td>{{ product.stockQuantity }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
