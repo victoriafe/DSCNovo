@@ -65,17 +65,12 @@
             text-decoration: none;
             font-size: 16px;
             color: #fff;
-            display: flex; /* Flex para alinhar o ícone e texto */
-            align-items: center; /* Centraliza verticalmente */
+            display: block;
             transition: 0.3s; /* Efeito de transição suave */
         }
 
         .sidebar a:hover {
             background-color: #004080; /* Cor ao passar o mouse */
-        }
-
-        .sidebar i { /* Estilo para os ícones */
-            margin-right: 10px; /* Espaço entre o ícone e o texto */
         }
 
         .main-content {
@@ -93,6 +88,11 @@
             position: absolute; /* Fixo na navbar */
             left: 15px; /* Espaçamento à esquerda */
             z-index: 1001; /* Fica acima do menu lateral */
+        }
+
+        .search-input {
+            width: 200px;
+            margin-left: 15px;
         }
     </style>
 {% endblock %}
@@ -132,26 +132,31 @@
 
 <!-- Menu lateral -->
 <div id="mySidebar" class="sidebar">
-    <a href="/">
-        <i class="bi bi-house"></i> Menu Inicial
-    </a>
+    <input type="text" id="searchInput" class="form-control search-input mt-2" placeholder="Pesquisar..."
+           onkeyup="filterMenu()">
+
+    <div class="mt-4"></div>
+
     {% for route in routes %}
         {% if is_granted(route.access) %}
-            <a href="{{ path(route.name) }}">
-                <i class="{{ route.icon_name }}"></i> {{ route.title }}
+            <a href="{{ path(route.name) }}" class="menu-item" data-title="{{ route.title }}">
+                <i class="{{ route.icon_name }}"></i> <span style="margin-left: 20px">{{ route.title }}</span>
             </a>
         {% endif %}
     {% endfor %}
     {% if app.user %}
         <a href="{{ path('app_logout') }}">
-            <i class="bi bi-box-arrow-right"></i> Sair
+            <i class="bi bi-box-arrow-right"></i>
+            <span style="margin-left: 20px;">Sair</span>
         </a>
     {% else %}
         <a href="{{ path('app_register') }}">
-            <i class="bi bi-person-plus"></i> Registrar
+            <i class="bi bi-person-plus"></i>
+            <span style="margin-left: 20px;">Registrar</span>
         </a>
         <a href="{{ path('app_login') }}">
-            <i class="bi bi-person-circle"></i> Login
+            <i class="bi bi-box-arrow-in-right"></i>
+            <span style="margin-left: 20px;">Login</span>
         </a>
     {% endif %}
 </div>
@@ -172,5 +177,20 @@
             sidebar.style.left = "-250px"; // Esconde o menu
             mainContent.style.marginLeft = "0"; // Remove espaço do conteúdo
         }
+    }
+
+    function filterMenu() {
+        const input = document.getElementById('searchInput');
+        const filter = input.value.toLowerCase();
+        const items = document.querySelectorAll('.sidebar .menu-item');
+
+        items.forEach(item => {
+            const title = item.getAttribute('data-title').toLowerCase();
+            if (title.includes(filter)) {
+                item.style.display = ""; // Mostra o item se corresponder
+            } else {
+                item.style.display = "none"; // Esconde o item se não corresponder
+            }
+        });
     }
 </script>
