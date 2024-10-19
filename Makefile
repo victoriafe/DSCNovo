@@ -38,7 +38,6 @@ build: ## Builds the Docker images
 	@$(DOCKER_COMP) build --pull --no-cache
 
 up: ## Start the docker hub in detached mode (no logs)
-	@make migrate
 	@$(DOCKER_COMP) up --detach --wait
 
 start: build up ## Build and start the containers
