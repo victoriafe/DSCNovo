@@ -15,6 +15,12 @@ SYMFONY  = $(PHP) bin/console
 
 IP = $(shell ifconfig -a | grep -w 192 | awk '{print $$2}')
 
+build-assets:
+	@$(DOCKER_COMP) exec php npm run dev
+
+watch:
+	@$(DOCKER_COMP) exec php npm run watch
+
 setup: build up fixtures
 
 fixtures:
