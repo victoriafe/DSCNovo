@@ -65,12 +65,17 @@
             text-decoration: none;
             font-size: 16px;
             color: #fff;
-            display: block;
+            display: flex; /* Flex para alinhar o ícone e texto */
+            align-items: center; /* Centraliza verticalmente */
             transition: 0.3s; /* Efeito de transição suave */
         }
 
         .sidebar a:hover {
             background-color: #004080; /* Cor ao passar o mouse */
+        }
+
+        .sidebar i { /* Estilo para os ícones */
+            margin-right: 10px; /* Espaço entre o ícone e o texto */
         }
 
         .main-content {
@@ -101,9 +106,9 @@
         </a>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link"></a>
-                        </li>
+                <li class="nav-item">
+                    <a class="nav-link"></a>
+                </li>
             </ul>
             <ul class="navbar-nav ml-auto">
                 {% if app.user %}
@@ -127,17 +132,27 @@
 
 <!-- Menu lateral -->
 <div id="mySidebar" class="sidebar">
-    <a href="/">Menu Inicial</a>
+    <a href="/">
+        <i class="bi bi-house"></i> Menu Inicial
+    </a>
     {% for route in routes %}
         {% if is_granted(route.access) %}
-            <a href="{{ path(route.name) }}">{{ route.title }}</a>
+            <a href="{{ path(route.name) }}">
+                <i class="{{ route.icon_name }}"></i> {{ route.title }}
+            </a>
         {% endif %}
     {% endfor %}
     {% if app.user %}
-        <a href="{{ path('app_logout') }}">Sair</a>
+        <a href="{{ path('app_logout') }}">
+            <i class="bi bi-box-arrow-right"></i> Sair
+        </a>
     {% else %}
-        <a href="{{ path('app_register') }}">Registrar</a>
-        <a href="{{ path('app_login') }}">Login</a>
+        <a href="{{ path('app_register') }}">
+            <i class="bi bi-person-plus"></i> Registrar
+        </a>
+        <a href="{{ path('app_login') }}">
+            <i class="bi bi-person-circle"></i> Login
+        </a>
     {% endif %}
 </div>
 
