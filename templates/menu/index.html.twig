@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cardápio{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Cardápio</h1>
+
+        {% for category, products in categories %}
+            <div class="mb-4 mt-5">
+                <h2 class="border-bottom pb-2">
+                    {{ category }} <span class="badge bg-secondary">{{ products|length }}</span>
+                </h2>
+                <div class="row d-flex flex-wrap justify-content-start">
+                    {% for product in products %}
+                        <div class="col-md-4 mb-3 d-flex justify-content-center">
+                            <div class="card" style="width: 200px; height: 220px;">
+                                {% if product.imageUrl %}
+                                    <img src="{{ product.imageUrl }}" class="card-img-top" alt="{{ product.name }}" style="height: 120px; object-fit: cover;">
+                                {% else %}
+                                    <img src="https://idea7.co.uk/wp-content/uploads/2021/02/placeholder-250x250-1.png" class="card-img-top" alt="Imagem não disponível" style="height: 150px; object-fit: cover;">
+                                {% endif %}
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ product.name }}</h5>
+                                    <p class="card-text">Preço: R$ {{ product.price|number_format(2, ',', '.') }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <style>
+        .card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+        }
+        .card-title {
+            font-weight: bold;
+        }
+        .badge {
+            margin-left: 10px;
+        }
+    </style>
+{% endblock %}

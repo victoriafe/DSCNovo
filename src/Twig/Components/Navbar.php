@@ -10,6 +10,11 @@ final class Navbar
     public string $title;
 
     public array $routes = [
+        'menu' => [
+            'name' => 'app_menu_index',
+            'title' => 'Cardápio',
+            'access' => 'ROLE_USER'
+        ],
         'table_orders' => [
             'name' => 'app_table_order_index',
             'title' => 'Comandas',

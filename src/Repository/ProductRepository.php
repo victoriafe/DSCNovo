@@ -16,6 +16,15 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
+    public function findAllWithStock() {
+        $qb = $this->createQueryBuilder('p');
+
+        $qb->join('p.stock', 's')
+            ->where('s.quantity > 0');
+
+        return $qb->getQuery()->getResult();
+    }
+
     //    /**
     //     * @return Product[] Returns an array of Product objects
     //     */

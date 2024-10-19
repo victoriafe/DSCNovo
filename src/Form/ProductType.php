@@ -5,11 +5,14 @@ namespace App\Form;
 use App\Entity\Product;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Positive;
+use Symfony\Component\Validator\Constraints\UrlValidator;
 
 class ProductType extends AbstractType
 {
@@ -37,6 +40,30 @@ class ProductType extends AbstractType
                 ],
                 'attr' => [
                     'placeholder' => 'Digite o nome do produto',
+                    'class' => 'form-control',
+                ],
+            ])
+            ->add('description', TextareaType::class, [
+                'label' => 'Descrição do produto',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Por favor, insira a descrição do produto.',
+                    ]),
+                ],
+                'attr' => [
+                    'placeholder' => 'Digite a descrição do produto',
+                    'class' => 'form-control',
+                ],
+            ])
+            ->add('imageUrl', UrlType::class, [
+                'label' => 'Imagem',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Por favor, insira o url da imagem do produto.',
+                    ]),
+                ],
+                'attr' => [
+                    'placeholder' => 'Insira a url da imagem do produto',
                     'class' => 'form-control',
                 ],
             ])
