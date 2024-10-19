@@ -3,18 +3,40 @@
 {% block title %}Relatórios{% endblock %}
 
 {% block body %}
-    <div class="container mt-5">
-        <h1 class="mb-4">Relatório de Vendas</h1>
+<div class="container mt-5">
+    <h1 class="mb-4 text-center text-primary">Relatório de Vendas</h1>
 
-        <div class="mb-4">
-            <h2>Total de comandas atendidas: {{ totalOrders }}</h2>
-            <h2>Total de vendas de produtos: {{ totalSales }}</h2>
-            <h2>Receita total: R$ {{ totalRevenue|number_format(2, ',', '.') }}</h2>
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">Total de Comandas Atendidas</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ totalOrders }}</h5>
+                </div>
+            </div>
         </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-header">Total de Vendas de Produtos</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ totalSales }}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-warning mb-3">
+                <div class="card-header">Receita Total</div>
+                <div class="card-body">
+                    <h5 class="card-title">R$ {{ totalRevenue|number_format(2, ',', '.') }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <h3>Produtos Mais Vendidos</h3>
-        <table class="table table-striped">
-            <thead>
+    <h3 class="mt-5">Produtos mais Vendidos</h3>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="thead-dark">
             <tr>
                 <th>Nome do Produto</th>
                 <th>Quantidade Vendida</th>
@@ -22,17 +44,19 @@
             </thead>
             <tbody>
             {% for product in topProducts %}
-                <tr>
+                <tr data-toggle="tooltip" title="Clique para mais detalhes">
                     <td>{{ product.name }}</td>
                     <td>{{ product.totalQuantity }}</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
-        <h3>Categorias mas vendidas</h3>
+    </div>
 
-        <table class="table table-striped">
-            <thead>
+    <h3 class="mt-5">Categorias mais Vendidas</h3>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="thead-dark">
             <tr>
                 <th>Categoria</th>
                 <th>Quantidade Vendida</th>
@@ -40,15 +64,114 @@
             </thead>
             <tbody>
             {% for category in topCategories %}
-                <tr>
+                <tr data-toggle="tooltip" title="Clique para mais detalhes">
                     <td>{{ category.category }}</td>
                     <td>{{ category.totalQuantity }}</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
-
     </div>
 
+    <h3 class="mt-5 ">Gráficos de Vendas por Itens</h3>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <canvas id="salesChart" width="400" height="200"></canvas>
+        </div>
+    </div>
+
+    <h3 class="mt-5 ">Gráficos de Vendas por Categoria</h3>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <canvas id="categoryChart" width="300" height="200"></canvas>
+        </div>
+    </div>
+
+    <style>
+        #categoryChart {
+            max-width: 100%;
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-{% endblock %}
+    <script>
+        $(document).ready(function() {
+            initializeCharts();
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                if ($(e.target).attr('href') === '#relatorios') {
+                    initializeCharts();
+                }
+            });
+        });
+
+        function initializeCharts() {
+            const ctxSales = document.getElementById('salesChart').getContext('2d');
+            const salesChart = new Chart(ctxSales, {
+                type: 'bar',
+                data: {
+                    labels: {{ topProducts|map(product => product.name)|json_encode|raw }},
+                    datasets: [{
+                        label: 'Quantidade Vendida',
+                        data: {{ topProducts|map(product => product.totalQuantity)|json_encode|raw }},
+                        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1,
+                        hoverBackgroundColor: 'rgba(75, 192, 192, 0.8)',
+                        hoverBorderColor: 'rgba(75, 192, 192, 1)',
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    animation: {
+                        duration: 1000,
+                        easing: 'easeOutBounce'
+                    }
+                }
+            });
+
+            const ctxCategory = document.getElementById('categoryChart').getContext('2d');
+            const categoryChart = new Chart(ctxCategory, {
+                type: 'pie',
+                data: {
+                    labels: {{ topCategories|map(category => category.category)|json_encode|raw }},
+                    datasets: [{
+                        label: 'Distribuição de Vendas',
+                        data: {{ topCategories|map(category => category.totalQuantity)|json_encode|raw }},
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(54, 162, 235, 0.5)',
+                            'rgba(255, 206, 86, 0.5)',
+                            'rgba(75, 192, 192, 0.5)',
+                            'rgba(153, 102, 255, 0.5)',
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                        ],
+                        borderWidth: 1,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    animation: {
+                        animateScale: true,
+                        animateRotate: true
+                    }
+                }
+            });
+
+            // Inicializa os tooltips
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+        }
+    </script>
+    {% endblock %}
