@@ -42,7 +42,7 @@ Configure o ambiente:
    Execute o comando abaixo para configurar o ambiente:
    
    make setup
-
+   make up
 
 
 Acesso ao Sistema
