@@ -17,6 +17,9 @@ IP = $(shell ifconfig -a | grep -w 192 | awk '{print $$2}')
 
 setup: build up fixtures
 
+migrate:
+	@$(DOCKER_COMP) exec php php bin/console doctrine:migrations:migrate --no-interaction
+
 fixtures:
 	@$(DOCKER_COMP) exec php php bin/console doctrine:fixtures:load --no-interaction
 
@@ -35,6 +38,7 @@ build: ## Builds the Docker images
 	@$(DOCKER_COMP) build --pull --no-cache
 
 up: ## Start the docker hub in detached mode (no logs)
+	@make migrate
 	@$(DOCKER_COMP) up --detach --wait
 
 start: build up ## Build and start the containers
