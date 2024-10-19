@@ -4,15 +4,22 @@ namespace App\Controller;
 
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 class MenuController extends AbstractController
 {
     #[Route('/menu', name: 'app_menu_index')]
-    public function index(ProductRepository $productRepository): Response
+    public function index(ProductRepository $productRepository, Request $request): Response
     {
-        $products = $productRepository->findAllWithStock();
+        $search = $request->query->get('search');
+
+        if ($search) {
+            $products = $productRepository->findBySearch($search);
+        } else {
+            $products = $productRepository->findAllWithStock();
+        }
 
         $categories = [];
 
@@ -33,4 +40,5 @@ class MenuController extends AbstractController
             'controller_name' => 'MenuController',
         ]);
     }
+
 }

@@ -6,6 +6,13 @@
     <div class="container mt-5">
         <h1 class="text-center mb-4">Cardápio</h1>
 
+        <form method="get" class="mb-4">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Buscar por produto" value="{{ app.request.get('search') }}">
+                <button class="btn btn-primary" type="submit">Pesquisar</button>
+            </div>
+        </form>
+
         {% for category, products in categories %}
             <div class="mb-4 mt-5">
                 <h2 class="border-bottom pb-2">
