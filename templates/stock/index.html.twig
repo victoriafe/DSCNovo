@@ -17,6 +17,7 @@
                     <table class="table table-hover table-bordered align-middle">
                         <thead class="table-dark">
                         <tr>
+                            <th scope="col">Nome</th>
                             <th scope="col">Quantidade</th>
                             <th scope="col">Preço de Compra</th>
                             <th scope="col">Preço de Venda</th>
@@ -28,6 +29,7 @@
                         <tbody>
                         {% for stock in stocks %}
                             <tr>
+                                <td>{{ stock.product.name }}</td>
                                 <td>{{ stock.quantity }}</td>
                                 <td>R$ {{ stock.purchasePrice|number_format(2, ',', '.') }}</td>
                                 <td>R$ {{ stock.salePrice|number_format(2, ',', '.') }}</td>
