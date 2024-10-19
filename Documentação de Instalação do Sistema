@@ -52,3 +52,8 @@ Imagem
 Instalar o WSL
 Instale o Subsistema do Windows para Linux com o comando wsl --install. Use um terminal Bash em seu computador Windows executado pela distribuição do Linux de sua preferência: Ubuntu, Debian, SUSE, Kali, Fedora, Pengwin, Alpine e muitas outras disponíveis.
 Instalar o WSL
+
+
+A senha de acesso de login
+Usuario: admin
+Senha: admin
