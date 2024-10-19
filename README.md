@@ -12,7 +12,7 @@ Este projeto tem como objetivo o desenvolvimento de um sistema para gerenciament
 
 # 📚 Documentação
 - [Requisitos do Sistema](https://docs.google.com/document/d/1QUntVmcd6tt4FJlpxdE1nCRJ9l5-6I0ZrjyMGrjP_5E/edit?pli=1#heading=h.f13ddre2a8e5)
-- [Manual de Uso]
+- [Manual de Uso](https://github.com/victoriafe/DSCNovo/blob/main/Documenta%C3%A7%C3%A3o%20de%20Instala%C3%A7%C3%A3o%20do%20Sistema)
 
 # 👥 Equipe
 - Desenvolvedor - [Arthur Soares Cardoso](https://github.com/Arthur-Sooares)
