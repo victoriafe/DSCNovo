@@ -43,7 +43,7 @@
                                 <td>{{ order.quantity }}</td>
                                 <td>R$ {{ order.subtotal|number_format(2, ',', '.') }}</td>
                                 <td class="text-center">
-                                    {% if order.status.name != 'DELIVERED' %}
+                                    {% if order.status.name != 'DELIVERED' and is_granted('ROLE_WAITER') %}
                                         <form method="post"
                                               action="{{ path('app_order_finish', {'id': order.id}) }}">
                                             <button type="submit"
@@ -53,8 +53,10 @@
                                     {% endif %}
                                     <a href="{{ path('app_order_show', {'id': order.id}) }}"
                                        class="btn btn-outline-info btn-sm me-2">Mostrar</a>
-                                    <a href="{{ path('app_order_edit', {'id': order.id}) }}"
-                                       class="btn btn-outline-warning btn-sm">Editar</a>
+                                    {% if is_granted('ROLE_WAITER') %}
+                                        <a href="{{ path('app_order_edit', {'id': order.id}) }}"
+                                           class="btn btn-outline-warning btn-sm">Editar</a>
+                                    {% endif %}
                                 </td>
                             </tr>
                         {% else %}

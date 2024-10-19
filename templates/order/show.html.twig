@@ -39,8 +39,10 @@
 
                 <div class="d-flex justify-content-between mt-4">
                     <a href="{{ path('app_order_index') }}" class="btn btn-outline-secondary">Voltar à lista</a>
-                    <a href="{{ path('app_order_edit', {'id': order.id}) }}"
-                       class="btn btn-outline-warning">Editar</a>
+                    {% if is_granted('ROLE_WAITER') %}
+                        <a href="{{ path('app_order_edit', {'id': order.id}) }}"
+                           class="btn btn-outline-warning">Editar</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

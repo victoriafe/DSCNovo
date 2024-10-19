@@ -23,7 +23,7 @@ final class Navbar
         'orders' => [
             'name' => 'app_order_index',
             'title' => 'Pedidos',
-            'access' => 'ROLE_WAITER',
+            'access' => 'ROLE_CHEF',
         ],
         'products' => [
             'name' => 'app_product_index',
