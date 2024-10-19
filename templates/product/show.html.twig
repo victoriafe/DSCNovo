@@ -10,6 +10,12 @@
             <div class="col-lg-6">
                 <h1 class="text-center mb-4">Detalhes do produto</h1>
 
+                {% if product.imageUrl %}
+                    <img src="{{ product.imageUrl }}" class="card-img-top mt-4 mb-4" alt="{{ product.name }}" style="height: 150px; object-fit: cover;">
+                {% else %}
+                    <img src="https://idea7.co.uk/wp-content/uploads/2021/02/placeholder-250x250-1.png" class="card-img-top mt-4 mb-4" alt="Imagem não disponível" style="height: 150px; object-fit: cover;">
+                {% endif %}
+
                 <table class="table table-bordered">
                     <tbody>
                     <tr>
@@ -17,12 +23,16 @@
                         <td>{{ product.id }}</td>
                     </tr>
                     <tr>
+                        <th scope="row">Nome</th>
+                        <td>{{ product.name }}</td>
+                    </tr>
+                    <tr>
                         <th scope="row">Categoria</th>
                         <td>{{ product.category }}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Nome</th>
-                        <td>{{ product.name }}</td>
+                        <th scope="row">Descrição</th>
+                        <td>{{ product.description }}</td>
                     </tr>
                     <tr>
                         <th scope="row">Preço</th>

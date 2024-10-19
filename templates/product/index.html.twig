@@ -17,8 +17,8 @@
                     <table class="table table-hover table-bordered align-middle">
                         <thead class="table-dark">
                         <tr>
-                            <th scope="col">Categoria</th>
                             <th scope="col">Nome</th>
+                            <th scope="col">Categoria</th>
                             <th scope="col">Preço</th>
                             <th scope="col" class="text-center">Ações</th>
                         </tr>
@@ -26,8 +26,8 @@
                         <tbody>
                         {% for product in products %}
                             <tr>
-                                <td>{{ product.category }}</td>
                                 <td>{{ product.name }}</td>
+                                <td>{{ product.category }}</td>
                                 <td>R$ {{ product.price|number_format(2, ',', '.') }}</td>
                                 <td class="text-center">
                                     <a href="{{ path('app_product_show', {'id': product.id}) }}"
