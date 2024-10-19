@@ -4,7 +4,6 @@
         font-family: 'Arial', sans-serif;
     }
 
-    /* Estilização do botão de adicionar produto */
     .btn-outline-success {
         background-color: #4ece4a;
         border-color: #4ece4a;
@@ -19,7 +18,6 @@
         box-shadow: 0 4px 10px rgba(0, 51, 102, 0.2);
     }
 
-    /* Estilização da tabela */
     .table {
         width: 100%;
         table-layout: auto;
@@ -37,16 +35,16 @@
         transition: background-color 0.2s ease;
     }
 
-    /* Bordas horizontais no corpo */
+
     .table tbody td {
         border-top: 1px solid #80c1ff;
-        border-bottom: 1px solid #80c1ff; 
+        border-bottom: 1px solid #80c1ff;
         color: #333;
         padding: 10px;
         vertical-align: middle;
     }
 
-    /* Bordas verticais apenas no thead */
+
     .table thead th {
         background-color: #0066cc;
         color: #ffff;
@@ -56,11 +54,10 @@
         font-weight: bold;
     }
 
-    .table thead th:last-child {
+    .table thead th:last-    /* Botões de ações na tabela */child {
         border-right: none;
     }
 
-    /* Botões de ações na tabela */
     .btn-outline-info {
         border-color: #3399ff;
         color: #3399ff;
@@ -85,12 +82,9 @@
         box-shadow: 0 4px 10px rgba(255, 204, 0, 0.2);
     }
 
-    /* Centralização do texto */
     .text-center {
         text-align: center;
     }
-
-    /* Ajustes de espaçamento */
     .container {
         margin-top: 50px;
         margin-bottom: 50px;
@@ -100,4 +94,7 @@
     .btn-sm {
         padding: 5px 10px;
         font-size: 0.9rem;
+    }
+    .mb-4{
+        text-align: center;
     }

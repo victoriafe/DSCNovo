@@ -1,6 +1,6 @@
 
 body {
-    background: linear-gradient(to right, #4a90e2, #50e3c2);
+    background: linear-gradient(to right, #2c3e50, #4ca1af);
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -20,6 +20,6 @@ h1 {
     margin-bottom: 1rem;
 }
 .btn {
-    background-color: #4a90e2; /* Custom button color */
+    background-color: #4a90e2;
     color: white;
 }

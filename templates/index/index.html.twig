@@ -5,25 +5,23 @@
 {% block body %}
     <style>
         body {
-            background-color: #f4f4f9;
+            background: linear-gradient(to right, #2c3e50, #4ca1af);
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
+            color: #fff;
+            overflow-x: hidden;
         }
         .container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(2, 1fr);
             gap: 20px;
             max-width: 1200px;
             margin: 2em auto;
             padding: 2em;
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-        .container:hover {
-            transform: scale(1.02);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
         .header {
             grid-column: span 2;
@@ -31,65 +29,62 @@
             margin-bottom: 1.5em;
         }
         h1 {
-            font-size: 2.8em;
-            color: #2c3e50; /* Azul escuro */
+            font-size: 3em;
+            color: #f39c12;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
         }
         h2 {
-            color: #34495e; /* Azul médio */
+            color: #ecf0f1;
             margin-top: 0.5em;
         }
-        .welcome-message {
-            font-size: 1.2em;
-            color: #555;
-            margin: 1.5em 0;
-            animation: fadeIn 1s ease;
+        .feature {
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 2em;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+            opacity: 0;
+            animation: fadeIn 0.6s forwards;
+            text-decoration: none; /* Remove underline from links */
+            color: #2c3e50; /* Change text color */
         }
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .feature {
-            background-color: #e8f4f8;
-            border-radius: 8px;
-            padding: 1.5em;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, background-color 0.3s;
-            cursor: pointer;
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .feature:hover {
             transform: translateY(-5px);
-            background-color: #d1e7dd; /* Verde claro */
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
         }
         .feature h3 {
-            color: #2980b9; /* Azul */
             margin-bottom: 0.5em;
+            font-size: 1.8em;
         }
         .feature p {
-            color: #444;
-        }
-        .info-list {
-            list-style: none;
-            padding: 0;
-            text-align: left;
-        }
-        .info-list li {
-            margin: 0.5em 0;
             font-size: 1.1em;
-            color: #444;
         }
         .footer {
             grid-column: span 2;
             text-align: center;
             margin-top: 2em;
             font-size: 0.9em;
-            color: #888;
-            animation: slideIn 0.5s ease;
+            color: #ecf0f1;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+            background-color: #2c3e50;
         }
-        @keyframes slideIn {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        .footer svg {
+            vertical-align: middle;
+            margin: 0 5px;
+            fill: #f39c12;
+            transition: fill 0.3s;
         }
+        .footer svg:hover {
+            fill: #e67e22;
+        }
+
     </style>
 
     <div class="container">
@@ -98,35 +93,49 @@
             <h2>Seu sistema de gestão para bar e restaurante</h2>
         </div>
 
-        <div class="feature" onclick="showAlert('Gerenciamento de Pedidos')">
+        <a href="{{ path('app_login') }}" class="feature">
             <h3>Gerenciamento de Pedidos</h3>
             <p>Controle eficiente de pedidos e comandas, com fácil acesso e gerenciamento.</p>
-        </div>
+        </a>
 
-        <div class="feature" onclick="showAlert('Controle de Estoque')">
+        <a href="{{ path('app_login') }}" class="feature">
             <h3>Controle de Estoque</h3>
             <p>Monitore o estoque em tempo real e evite desperdícios.</p>
-        </div>
+        </a>
 
-        <div class="feature" onclick="showAlert('Relatórios de Vendas')">
+        <a href="{{ path('app_login') }}" class="feature">
             <h3>Relatórios de Vendas</h3>
             <p>Gere relatórios detalhados para entender o desempenho do seu negócio.</p>
-        </div>
+        </a>
 
-        <div class="feature" onclick="showAlert('Atendimento ao Cliente')">
+        <a href="{{ path('app_login') }}" class="feature">
             <h3>Atendimento ao Cliente</h3>
             <p>Melhore o atendimento com um sistema otimizado e integrado.</p>
-        </div>
+        </a>
 
         <div class="footer">
-            <p>Esta mensagem é gerada a partir do seu controller em <code>/app/src/Controller/IndexController.php</code></p>
-            <p>Template: <code>/app/templates/index/index.html.twig</code></p>
+            <p>&copy; 2024 VAT SISTEMAS. Todos os direitos reservados.</p>
+            <p>
+                <a href="mailto:victoriadamascena222@gmail.com" style="color: #f39c12;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2 0h12a1 1 0 0 1 1 1v.182L8 9.618 1 5.182V5a1 1 0 0 1 1-1zm12 1.618L8 8.618 2 6.618V12h12V6.618z"/>
+                    </svg>
+                </a>
+                |
+                <a href="https://www.facebook.com/" target="_blank" style="color: #f39c12;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 4.418 3.58 8 8 8 4.418 0 8-3.582 8-8 0-4.42-3.582-8-8-8zm2.95 8.4h-2.3v7.6H6.3V8.4H5V6h1.3V5.1c0-1.1.73-1.6 1.8-1.6.511 0 .951.04 1.08.06v1.3h-.73c-.71 0-.85.34-.85.83V6h1.6l-.2 2.4z"/>
+                    </svg>
+                </a>
+                |
+                <a href="https://www.instagram.com/" target="_blank" style="color: #f39c12;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                        <path d="M8 0c1.7 0 1.8 0 2.4.1.6 0 1.2.1 1.8.3.6.2 1.1.5 1.6.9.5.5.8 1 .9 1.6.2.6.3 1.2.3 1.8s0 1.8-.1 2.4c0 1.7 0 1.8-.1 2.4-.1.6-.2 1.2-.3 1.8-.2.6-.5 1.1-.9 1.6-.5.5-1 .8-1.6 1-.6.2-1.2.3-1.8.3-.6 0-.7 0-2.4-.1-1.7 0-1.8 0-2.4-.1-.6 0-1.2-.1-1.8-.3-.6-.2-1.1-.5-1.6-.9-.5-.5-.8-1-.9-1.6C0 9.8 0 9.7 0 8c0-1.7 0-1.8.1-2.4.1-.6.2-1.2.3-1.8C.5 3.1.8 2.6 1.3 2.1 1.8 1.6 2.3 1.3 3 1.1c.6-.2 1.2-.3 1.8-.3.6 0 .7 0 2.4.1zm0 1.5c-1.5 0-1.7 0-2.2.1-.6.1-1 .3-1.3.6-.3.3-.5.7-.6 1.3-.1.6-.1.7-.1 2.2 0 1.5 0 1.7.1 2.2.1.6.3 1 .6 1.3.3.3.7.5 1.3.6.6.1.7.1 2.2.1 1.5 0 1.7 0 2.2-.1.6-.1 1-.3 1.3-.6.3-.3.5-.7.6-1.3.1-.6.1-.7.1-2.2 0-1.5 0-1.7-.1-2.2-.1-.6-.3-1-.6-1.3-.3-.3-.7-.5-1.3-.6-.6-.1-.7-.1-2.2-.1z"/>
+                        <path d="M8 3.2c-2.6 0-4.8 2.2-4.8 4.8s2.2 4.8 4.8 4.8 4.8-2.2 4.8-4.8S10.6 3.2 8 3.2zm0 1.6c1.8 0 3.2 1.5 3.2 3.2s-1.5 3.2-3.2 3.2-3.2-1.5-3.2-3.2 1.5-3.2 3.2-3.2z"/>
+                        <circle cx="11.7" cy="4.3" r=".4"/>
+                    </svg>
+                </a>
+            </p>
         </div>
     </div>
-
-    <script>
-        function showAlert(featureName) {
-            alert('Você clicou em: ' + featureName);
-        }
-    </script>
 {% endblock %}
