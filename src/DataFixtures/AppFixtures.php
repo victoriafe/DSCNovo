@@ -16,14 +16,24 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $user = new User();
+        $usersData = [
+            ['username' => 'admin', 'roles' => ['ROLE_ADMIN'], 'name' => 'Administrador', 'password' => 'admin'],
+            ['username' => 'waiter1', 'roles' => ['ROLE_WAITER'], 'name' => 'Garçom 1', 'password' => 'waiter'],
+            ['username' => 'waiter2', 'roles' => ['ROLE_WAITER'], 'name' => 'Garçom 2', 'password' => 'waiter'],
+            ['username' => 'chef', 'roles' => ['ROLE_CHEF'], 'name' => 'Chef', 'password' => 'chef'],
+        ];
 
-        $user->setUsername('admin');
-        $user->setName('admin');
-        $user->setRoles(['ROLE_ADMIN']);
-        $user->setPassword($this->userPasswordHasher->hashPassword($user, 'admin'));
+        foreach ($usersData as $userData) {
+            $user = new User();
 
-        $manager->persist($user);
+            $user->setUsername($userData['username']);
+            $user->setRoles($userData['roles']);
+            $user->setName($userData['name']);
+            $hashedPassword = $this->userPasswordHasher->hashPassword($user, $userData['password']);
+            $user->setPassword($hashedPassword);
+
+            $manager->persist($user);
+        }
 
         $manager->flush();
     }
