@@ -2,8 +2,21 @@ Documentação de Instalação do Sistema
 Requisitos
 Antes de mais nada, você vai precisar do Docker instalado no seu computador. Se ainda não tem, dá uma olhada na documentação oficial do Docker para instalar a versão correta para o seu sistema operacional.
 
+Docker Documentation
+Get Docker
+https://docs.docker.com/get-started/get-docker/
+
 Importante para usuários Windows
 Se você estiver usando Windows, é necessário ter o pacote make instalado. Você pode usar o Chocolatey ou o WSL (Windows Subsystem for Linux) para facilitar isso.
+
+Chocolatey Software
+Chocolatey - The package manager for Windows
+https://chocolatey.org/
+
+Imagem
+Instalar o WSL
+Instale o Subsistema do Windows para Linux com o comando wsl --install. Use um terminal Bash em seu computador Windows executado pela distribuição do Linux de sua preferência: Ubuntu, Debian, SUSE, Kali, Fedora, Pengwin, Alpine e muitas outras disponíveis.
+Instalar o WSL
 
 Passo a Passo da Instalação
 Clone o repositório do GitHub:
@@ -27,10 +40,9 @@ Navegue até o diretório do projeto:
 Configure o ambiente:
 
    Execute o comando abaixo para configurar o ambiente:
-
    
    make setup
-   
+
 
 
 Acesso ao Sistema
@@ -41,19 +53,8 @@ Depois que tudo estiver configurado, você pode acessar o sistema pelo seu naveg
 E se precisar acessar o phpMyAdmin, é só ir em:
 
 [http://localhost:8090](http://localhost:8090)
-Docker Documentation
-Get Docker
-Download and install Docker on the platform of your choice, including Mac, Linux, or Windows.
-Get Docker
-Chocolatey Software
-Chocolatey - The package manager for Windows
-Chocolatey is software management automation for Windows that wraps installers, executables, zips, and scripts into compiled packages. Chocolatey integrates w/SCCM, Puppet, Chef, etc. Chocolatey is trusted by businesses to manage software deployments.
-Imagem
-Instalar o WSL
-Instale o Subsistema do Windows para Linux com o comando wsl --install. Use um terminal Bash em seu computador Windows executado pela distribuição do Linux de sua preferência: Ubuntu, Debian, SUSE, Kali, Fedora, Pengwin, Alpine e muitas outras disponíveis.
-Instalar o WSL
 
 
-A senha de acesso de login
+A senha de acesso de login ao sistema
 Usuario: admin
 Senha: admin
