@@ -4,14 +4,14 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            transition: margin-left 0.3s; /* Efeito de transição suave para o corpo */
+            transition: margin-left 0.3s;
         }
 
         .navbar-custom {
             background-color: #003366;
-            position: fixed; /* Fixo no topo */
+            position: fixed;
             width: 100%;
-            z-index: 1000; /* Para garantir que a navbar fique acima de outros elementos */
+            z-index: 1000;
         }
 
         .navbar-custom .navbar-brand,
@@ -46,18 +46,35 @@
         .navbar-custom .navbar-toggler {
             border-color: #ffff;
         }
+        .navbar-custom .navbar-collapse {
+            display: flex;
+            justify-content: center;
+        }
+
+        .navbar-custom .navbar-nav {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .navbar-custom .nav-item {
+            margin: 0 -90px 0 490px;
+            font-family: Georgia;
+            font-size: 20px;
+        }
 
         .sidebar {
             height: 100%;
-            width: 250px; /* Largura do menu lateral */
+            width: 250px;
             position: fixed;
             top: 0;
-            left: -250px; /* Inicialmente escondido */
+            left: -250px;
             background-color: #003366;
-            overflow-x: hidden; /* Esconde o overflow horizontal */
-            transition: left 0.3s; /* Efeito de transição suave */
-            padding-top: 60px; /* Espaço no topo */
-            z-index: 999; /* Fica abaixo da navbar */
+            overflow-x: hidden;
+            transition: left 0.3s;
+            padding-top: 60px;
+            z-index: 999;
         }
 
         .sidebar a {
@@ -66,17 +83,17 @@
             font-size: 16px;
             color: #fff;
             display: block;
-            transition: 0.3s; /* Efeito de transição suave */
+            transition: 0.3s;
         }
 
         .sidebar a:hover {
-            background-color: #004080; /* Cor ao passar o mouse */
+            background-color: #004080;
         }
 
         .main-content {
             margin-left: 0;
-            transition: margin-left 0.3s; /* Efeito de transição suave */
-            padding: 16px; /* Padding do conteúdo principal */
+            transition: margin-left 0.3s;
+            padding: 16px;
         }
 
         .open-btn {
@@ -85,14 +102,18 @@
             background-color: #003366;
             color: white;
             border: none;
-            position: absolute; /* Fixo na navbar */
-            left: 15px; /* Espaçamento à esquerda */
-            z-index: 1001; /* Fica acima do menu lateral */
+            position: absolute;
+            left: 15px;
+            z-index: 1001;
         }
 
         .search-input {
             width: 200px;
             margin-left: 15px;
+        }
+        img{
+            width: 32px;
+            height: 32px;
         }
     </style>
 {% endblock %}
@@ -100,14 +121,14 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-custom">
     <div class="container-fluid">
-        <button class="open-btn" onclick="toggleSidebar()">&#9776;</button> <!-- Botão para abrir o menu -->
+        <button class="open-btn" onclick="toggleSidebar()">&#9776;</button>
         <a class="navbar-brand" href="/">
             <i class="bi bi-house-fill"></i>
         </a>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link"></a>
+                    <a class="nav-link">VAT SISTEMAS <img src="{{ asset('images/logo_branca.png') }}"></a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
@@ -171,11 +192,11 @@
         var mainContent = document.getElementById("main");
 
         if (sidebar.style.left === "-250px") {
-            sidebar.style.left = "0"; // Mostra o menu
-            mainContent.style.marginLeft = "250px"; // Adiciona espaço ao conteúdo
+            sidebar.style.left = "0";
+            mainContent.style.marginLeft = "250px";
         } else {
-            sidebar.style.left = "-250px"; // Esconde o menu
-            mainContent.style.marginLeft = "0"; // Remove espaço do conteúdo
+            sidebar.style.left = "-250px";
+            mainContent.style.marginLeft = "0";
         }
     }
 
@@ -187,9 +208,9 @@
         items.forEach(item => {
             const title = item.getAttribute('data-title').toLowerCase();
             if (title.includes(filter)) {
-                item.style.display = ""; // Mostra o item se corresponder
+                item.style.display = "";
             } else {
-                item.style.display = "none"; // Esconde o item se não corresponder
+                item.style.display = "none";
             }
         });
     }
