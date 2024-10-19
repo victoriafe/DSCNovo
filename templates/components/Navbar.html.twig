@@ -31,6 +31,29 @@
             text-shadow: 0 0 1px rgba(255, 255, 255, 0.75);
         }
 
+        .navbar-custom .navbar-collapse {
+            display: flex;
+            justify-content: space-between; /* Alinha os itens */
+            align-items: center; /* Centraliza verticalmente */
+        }
+
+        .navbar-custom .navbar-nav {
+            display: flex;
+            justify-content: flex-end;
+            flex-grow: 1; /* Permite que a nav ocupe o espaço disponível */
+
+        }
+
+        .navbar-custom .nav-item {
+            margin: 0; /* Remove as margens */
+            font-family: Georgia;
+            font-size: 20px;
+        }
+
+        .navbar-custom .logout {
+            margin-left: auto; /* Empurra para a direita */
+        }
+
         .navbar-custom .dropdown-menu {
             background-color: #003366;
         }
@@ -49,19 +72,6 @@
         .navbar-custom .navbar-collapse {
             display: flex;
             justify-content: center;
-        }
-
-        .navbar-custom .navbar-nav {
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            width: 100%;
-        }
-
-        .navbar-custom .nav-item {
-            margin: 0 -90px 0 490px;
-            font-family: Georgia;
-            font-size: 20px;
         }
 
         .sidebar {
@@ -126,12 +136,12 @@
             <i class="bi bi-house-fill"></i>
         </a>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link">VAT SISTEMAS <img src="{{ asset('images/logo_branca.png') }}"></a>
                 </li>
             </ul>
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav logout"> <!-- Adicionando a classe logout -->
                 {% if app.user %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -150,7 +160,6 @@
         </div>
     </div>
 </nav>
-
 <!-- Menu lateral -->
 <div id="mySidebar" class="sidebar">
     <input type="text" id="searchInput" class="form-control search-input mt-2" placeholder="Pesquisar..."
