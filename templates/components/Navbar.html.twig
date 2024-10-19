@@ -33,25 +33,25 @@
 
         .navbar-custom .navbar-collapse {
             display: flex;
-            justify-content: space-between; /* Alinha os itens */
-            align-items: center; /* Centraliza verticalmente */
+            justify-content: space-between;
+            align-items: center;
         }
 
         .navbar-custom .navbar-nav {
             display: flex;
             justify-content: flex-end;
-            flex-grow: 1; /* Permite que a nav ocupe o espaço disponível */
+            flex-grow: 1;
 
         }
 
         .navbar-custom .nav-item {
-            margin: 0; /* Remove as margens */
+            margin: 0;
             font-family: Georgia;
             font-size: 20px;
         }
 
         .navbar-custom .logout {
-            margin-left: auto; /* Empurra para a direita */
+            margin-left: auto;
         }
 
         .navbar-custom .dropdown-menu {
@@ -125,23 +125,31 @@
             width: 32px;
             height: 32px;
         }
+        .casa{
+            margin: -5px 0 0 20px;
+        }
     </style>
 {% endblock %}
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-custom">
-    <div class="container-fluid">
-        <button class="open-btn" onclick="toggleSidebar()">&#9776;</button>
-        <a class="navbar-brand" href="/">
-            <i class="bi bi-house-fill"></i>
-        </a>
+    <div class="container-fluid d-flex align-items-center">
+        <button class="open-btn me-3" onclick="toggleSidebar()">&#9776;</button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+            <div class="casa">
+                <a class="navbar-brand" href="/" style="position: relative; z-index: 1;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px   " fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+                        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
+                        <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z"/>
+                    </svg>
+                </a>
+            </div>
+            <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                    <a class="nav-link">VAT SISTEMAS <img src="{{ asset('images/logo_branca.png') }}"></a>
+                    <a class="nav-link" href="#">VAT SISTEMAS <img src="{{ asset('images/logo_branca.png') }}" style="height: 30px;"></a> <!-- Ajuste a altura conforme necessário -->
                 </li>
             </ul>
-            <ul class="navbar-nav logout"> <!-- Adicionando a classe logout -->
+            <ul class="navbar-nav logout">
                 {% if app.user %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -153,13 +161,13 @@
                         </ul>
                     </li>
                 {% else %}
-                    <a class="nav-link" href="{{ path('app_register') }}">Registrar</a>
                     <a class="nav-link" href="{{ path('app_login') }}">Login</a>
                 {% endif %}
             </ul>
         </div>
     </div>
 </nav>
+
 <!-- Menu lateral -->
 <div id="mySidebar" class="sidebar">
     <input type="text" id="searchInput" class="form-control search-input mt-2" placeholder="Pesquisar..."
