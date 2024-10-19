@@ -35,6 +35,11 @@ final class Navbar
             'title' => 'Mesas',
             'access' => 'ROLE_ADMIN',
         ],
+        'reports' => [
+            'name' => 'app_report_index',
+            'title' => 'Relatórios',
+            'access' => 'ROLE_ADMIN',
+        ]
     ];
 
 }
