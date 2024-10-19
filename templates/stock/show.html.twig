@@ -1,12 +1,10 @@
-{% block stylesheets %}
-    <link rel="stylesheet" href={{ asset("css/show.css") }} >
-{% endblock %}
-
 {% extends 'base.html.twig' %}
 
 {% block title %}Detalhes do estoque{% endblock %}
 
 {% block body %}
+    <link rel="stylesheet" href={{ asset("css/show.css") }} >
+
     <div class="container my-5">
         <div class="row justify-content-center">
             <div class="col-lg-6">
