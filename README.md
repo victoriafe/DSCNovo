@@ -11,7 +11,7 @@ Este projeto tem como objetivo o desenvolvimento de um sistema para gerenciament
 - Pagamentos e Faturamento: Integração para diversos métodos de pagamento.
 
 # 📚 Documentação
-- [Requisitos do Sistema](https://docs.google.com/document/d/1QUntVmcd6tt4FJlpxdE1nCRJ9l5-6I0ZrjyMGrjP_5E/edit?pli=1#heading=h.f13ddre2a8e5)
+- [Requisitos do Sistema](https://github.com/victoriafe/DSCNovo/blob/main/Documenta%C3%A7%C3%A3o%20de%20Requisitos.pdf)
 - [Manual de Uso](INSTALL.md)
 
 # 👥 Equipe
