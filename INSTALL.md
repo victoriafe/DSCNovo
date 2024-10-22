@@ -53,3 +53,6 @@ E se precisar acessar o phpMyAdmin, é só ir em:
 
 - **Usuário**: waiter1
 - **Senha**: waiter
+
+## Detalhes
+- **Na tela de Relatorios, é necessario atualizar a pagina para vizualizar todas as informações**
